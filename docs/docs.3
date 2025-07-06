@@ -1,0 +1,191 @@
+.TH METALRAY_API 3 MetalRay_API
+.SH NAME
+MetalRay API
+.SH DESCRIPTION
+The scripiting API for MetalRay Engine. It uses lua scripting.
+.SH SCRIPTING ENTITIES
+.TP
+.B entity_setPosition(entity, position)
+Modifies the position of the entity.
+The "position" argument needs to be a table with x, y and z fields.
+.TP
+.B entity_getPosition(entity)
+Returns a table containing the position in the fields x, y and z.
+.TP
+.B entity_setVelocity(entity, velocity)
+Modifies the velocity of the entity.
+The "velocity" argument needs to be a table with x, y and z values.
+.TP
+.B entity_getVelocity(entity)
+Returns a table containing the velocity in the fields x, y and z.
+.TP
+.B entity_setAcceleration(entity, acceleration)
+Modifies the acceleration of the entity.
+The "acceleration" argument needs to be a table with x, y and z values.
+.TP
+.B entity_getAcceleration(entity)
+Returns a table containing the acceleration in the fields x, y and z.
+.TP
+.B entity_setMaxVelocityAbs(entity, value)
+Sets the absolute max velocity to value. This is the max velocity when strafe jumping.
+.TP
+.B entity_setMaxVelocity(entity, value)
+Sets the max velocity to value. This is the max velocity when running straight.
+.TP
+.B entity_setGroundAcceleration(entity, value)
+Sets the default acceleration of the entity when on ground.
+.TP
+.B entity_setAirAcceleration(entity, value)
+Sets the default acceleration of the entity when on air.
+.TP
+.B entity_setFriction(entity, value)
+Sets the friction of the entity when it touches on ground.
+.TP
+.B entity_setGravity(entity, value)
+Sets the gravity of the entity.
+.TP
+.B entity_setDirection(entity, value)
+Sets the direction of the entity.
+.TP
+.B entity_getDirection(entity)
+Returns the value of the current direction of the entity
+.TP
+.B entity_getProperties(entity)
+Returns a table containing the properties that the entity has.
+The entity can't have a table as a property. It can have only booleans, numbers, strings or userdata
+.TP
+.B entity_setProperties(entity, properties)
+Sets the properties of a entity.
+The "properties" argument must be a table containing its properties.
+.TP
+.B entity_setDirectionToEntity(parent, enemy)
+Sets the "parent" enttiy direction to the direction of the "enemy" entity.
+.TP
+.B entity_getType(entity)
+Returns a string containing the type of the entity.
+.TP
+.B entity_playAnimation(entity, animation_array, fps)
+Plays an animation for the entity with "fps" frames per second.
+The animation_array is an array that contains in order what cells the animation
+should play.
+.TP
+.B entity_hasCollidedWithWorld(entity)
+If the entity hasn't collided with the world, the function returns NO_AXIS.
+If the entity has collided with the world on the x axis, the function returns X_AXIS.
+If the entity has collided with the world on the y axis, the function returns Y_AXIS.
+.TP
+.B entity_solveCollisionWithEntity(entity, fixer)
+Solves the collision between entity and fixer.
+.TP
+.B entity_isLookingAtEntity(context, viewer, viewed)
+Returns true if the "viewer" entity is looking at the direction of the "viewed" entity.
+Returns false otherwise.
+.TP
+.B entity_getDistanceSqrToEntity(entity1, entity2)
+Returns the squared distance between the two entities.
+.TP
+.B entity_getCollisionWithType(context, entity, type, ...)
+Returns true if the entity has collided with anything with type "type".
+The "type" argument is a string containing the type of the collided entity.
+The function also creates a stack in memory containing all the entities that
+were collided with "entity" of type "type"
+.TP
+.B entity_getEntityCollided(entity)
+Pops from the stack of the collided entities and returns a userdata to the entity.
+If there isn't no entity collided, it returns nil.
+.TP
+.B entity_testLineOfSight(context, viewer, viewed)
+Returns of true if there is any line of sight between the viewer and viewed entity.
+.TP
+.B entity_kill(entity)
+Kills the entity.
+.TP
+.B entity_jump(entity, jump_velocity)
+Makes the entity jump with a velocity "jump_velocity".
+.TP
+.B entity_setRelativeAcceleration(entity, x, y)
+Sets the acceleration of the entity relative to its direction.
+So if it is used entity_setRelativeAcceleration(entity, 0, 1), the entity
+will move forward.
+.TP
+.B context_addEntity(context, type)
+Adds an entity with type "type" to the scene. It also returns a userdata to the added entity.
+.TP
+.B context_searchEntityType(context, type, ...)
+Creates a stack in memory with all entities that have the type "type".
+.TP
+.B context_getSearchedEntity(context)
+Pops from the stack the entity searched and returns a userdata to it.
+.TP
+.B context_sortByDistanceToParent(context, parent)
+Sorts the stack of entities searched in relative distance from the entity "parent"
+.TP
+.B context_getElapsedTime(context)
+Returns the elapsed time between two frames.
+.TP
+.B context_playSfx(context, id)
+Plays a sound effect or music by its id.
+.TP
+.B context_isMusicPaused()
+Returns true if the music is paused.
+.TP
+.B context_pauseMusic()
+Pauses the music.
+.TP
+.B context_resumeMusic()
+Resumes the music.
+.TP
+.B context_stopMusic()
+Stops the music.
+.TP
+.B context_getWorldTile(context, i, j)
+Returns a world tile
+.TP
+.B context_setWorldTile(context, i, j, tile)
+Sets a world tile
+.TP
+.B input_getKeyDown(key)
+Returns true if the key is down.
+.TP
+.B input_getMouseDown(mouse_button)
+Returns true if the mouse_button is down.
+The argument is a string (either "left" or "right")
+
+.SH HUD SCRIPTING
+Any argument named rect is a table with the fields 'x', 'y', 'w', 'h'.
+Any argument named color is table with the fields 'r', 'g', 'b', 'a'.
+.TP
+.B button_style
+The button_style is a table with these contents:
+.TP
+	font, highlight_color, text_color, clicked_color, bg_color, outline_width
+.TP
+.B hud_loadFont(font_dir, size)
+Loads a font from file "font_dir" with size "size" and returns a userdata to it.
+.TP
+.B hud_loadTexture(texture_dir)
+Loads a texture from file "texture_dir".
+.TP
+.B hud_drawRect(rect, color)
+Draws a rect into the screen.
+.TP
+.B hud_drawTexture(texture, rect_src, rect_dst)
+Draws a texture into the screen.
+.TP
+.B hud_drawTextCentered(font, text, x, y, color)
+Draws a text centered in (x, y).
+.TP
+.B hud_putButton(style, rect, text)
+Puts a button and returns true if the button was pressed.
+.TP
+.B hud_isPaused(context)
+Returns true if the game is paused.
+.TP
+.B hud_setPause(context, value)
+Sets the game paused to true or false.
+.TP
+.B hud_getFPS(context)
+Returns the FPS of the game.
+.TP
+.B hud_loadWorld(context, filename)
+Loads a world from file "filename".
