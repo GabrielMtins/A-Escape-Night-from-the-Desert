@@ -1,0 +1,3 @@
+[submodule "editor/nativefiledialog"]
+	path = editor/nativefiledialog
+	url = https://github.com/mlabbe/nativefiledialog.git
