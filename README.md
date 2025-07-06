@@ -1,6 +1,6 @@
 # A-Escape-Night-from-the-Desert
 
-![Imagem do Jogo](https://img.itch.zone/aW1nLzEyMzQwNjcyLnBuZw==/347x500/7ZYCKn.png)
+![Imagem do Jogo](https://img.itch.zone/aW1nLzEyMzQwNjcyLnBuZw==/original/lVzNLc.png)
 
 A Escape Night from the Desert é um jogo de tiro em primeira pessoa que utiliza
 a técnica de raycasting para renderizar seus gráficos. O diferencial do jogo é
